@@ -1,8 +1,8 @@
 INF200 Exersices:
 =================
 
-FIRST_NAME SURNAME:
--------------------
+Sjur Klemetsen
+-----------------
 
 This repository contains all the exersices written as part of the
 advanced Python programming course at NMBU.
