@@ -10,15 +10,16 @@ def letter_freq(txt):
 
 
 def entropy(message):
+    import math
     t = letter_freq(message)
     n = sum(t.values())
-    n_i = sum(t.keys())
-    p_i = n_i / n
-
-
-
-
-
+    result = 0
+    char_occ = {}
+    for key, value in t.items():
+        char_occ[key] = value / n
+    for value in char_occ.values():
+        result += (value * math.log2(value)) * - 1
+    return result
 
 
 if __name__ == "__main__":
