@@ -15,10 +15,3 @@ def test_correct_number_of_outputs():
 
 def is_square(x):
     return abs(sqrt(x) - int(sqrt(x))) < 1e-10
-
-
-def test_squares_by_loop_produces_squares():
-    for number in squares_by_loop(50):
-        assert is_square(number)
-
-
