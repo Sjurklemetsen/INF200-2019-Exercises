@@ -11,3 +11,7 @@ def bubble_sort(data):
             if datalist[k] > datalist[k + 1]:
                 datalist[k], datalist[k + 1] = datalist[k + 1], datalist[k]
     return datalist
+
+
+def test_empty():
+    assert bubble_sort([]) == []
