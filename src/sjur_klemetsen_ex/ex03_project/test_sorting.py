@@ -19,3 +19,10 @@ def test_empty():
 
 def test_single():
     assert bubble_sort([1]) == [1]
+
+
+def test_sorted_is_not_original():
+    data = [3, 2, 1]
+    sorted_data = bubble_sort(data)
+    assert sorted_data != data
+
