@@ -8,10 +8,16 @@ import pytest
 
 
 def median(data):
-    sdata = sorted(data)
-    n = len(sdata)
-    return (sdata[n // 2] if n % 2 == 1
-            else 0.5 * (sdata[n // 2 - 1] + sdata[n // 2]))
+    sorted_data = sorted(data)
+    num_elements = len(sorted_data)
+    if num_elements % 2 == 1:
+        return sorted_data[num_elements // 2]
+    elif num_elements == 0:
+        raise ValueError
+    else:
+        return (
+            sorted_data[num_elements // 2 - 1] + sorted_data[num_elements // 2]
+        ) / 2
 
 
 def test_median_single():
