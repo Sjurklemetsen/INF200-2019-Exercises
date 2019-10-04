@@ -33,4 +33,8 @@ def test_ordered():
 def test_reversed_ordered():
     reversed_list = [4, 3, 2, 1]
     assert median(reversed_list) == 2.5
-    
+
+
+def test_unordered():
+    unordered_list = [2, 5, 3, 1]
+    assert median(unordered_list) == 2.5
