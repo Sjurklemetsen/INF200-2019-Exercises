@@ -52,4 +52,3 @@ def test_unordered():
 def test_value_error():
     with pytest.raises(ValueError):
         median([])
-
