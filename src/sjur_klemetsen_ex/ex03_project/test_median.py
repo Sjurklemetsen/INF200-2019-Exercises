@@ -4,6 +4,9 @@ __author__ = "Sjur Spjeld Klemetsen"
 __email__ = "sjkl@nmbu.no"
 
 
+import pytest
+
+
 def median(data):
     sdata = sorted(data)
     n = len(sdata)
@@ -38,3 +41,9 @@ def test_reversed_ordered():
 def test_unordered():
     unordered_list = [2, 5, 3, 1]
     assert median(unordered_list) == 2.5
+
+
+def test_value_error():
+    with pytest.raises(ValueError):
+        median([])
+
