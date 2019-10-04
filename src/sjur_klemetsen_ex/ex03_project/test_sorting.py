@@ -15,3 +15,7 @@ def bubble_sort(data):
 
 def test_empty():
     assert bubble_sort([]) == []
+
+
+def test_single():
+    assert bubble_sort([1]) == [1]
