@@ -10,3 +10,8 @@ def median(data):
     return (sdata[n // 2] if n % 2 == 1
             else 0.5 * (sdata[n // 2 - 1] + sdata[n // 2]))
 
+
+def test_median_single():
+    assert median([4]) == 4
+
+
