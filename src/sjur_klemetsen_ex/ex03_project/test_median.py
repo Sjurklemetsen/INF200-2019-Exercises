@@ -15,3 +15,7 @@ def test_median_single():
     assert median([4]) == 4
 
 
+def test_median_odd_numbers():
+    odd_numbers = [1, 9, 5, 3, 7]
+    assert median(odd_numbers) == 5
+
