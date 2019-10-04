@@ -39,3 +39,9 @@ def test_sort_sorted():
     assert sorted_data == data
 
 
+def test_sorted_reversed():
+    data = [4, 3, 2, 1]
+    sorted_data = bubble_sort(data)
+    assert sorted_data == [1, 2, 3, 4]
+
+
