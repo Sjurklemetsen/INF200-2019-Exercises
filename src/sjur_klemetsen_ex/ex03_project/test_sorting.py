@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-__author__ = 'Sjur Spjeld Klemetsen'
-__email__ = 'sjkl@nmbu.no'
+__author__ = "Sjur Spjeld Klemetsen"
+__email__ = "sjkl@nmbu.no"
+
+
+from hypothesis import given, strategies
 
 
 def bubble_sort(data):
@@ -45,3 +48,14 @@ def test_sorted_reversed():
     assert sorted_data == [1, 2, 3, 4]
 
 
+def test_sort_all_equal():
+    data = [2, 2, 2, 2]
+    sorted_data = bubble_sort(data)
+    assert sorted_data == [2, 2, 2, 2]
+
+
+@given(strategies.lists(strategies.integers()))
+def test_sorting(int_list):
+    sorted_data = bubble_sort(int_list)
+    for small, large in zip(sorted_data[:-1], sorted_data[1:]):
+        assert small <= large
