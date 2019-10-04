@@ -19,3 +19,7 @@ def test_median_odd_numbers():
     odd_numbers = [1, 9, 5, 3, 7]
     assert median(odd_numbers) == 5
 
+
+def test_median_even_numbers():
+    even_numbers = [1, 3, 2, 5, 4, 6]
+    assert median(even_numbers) == 3.5
