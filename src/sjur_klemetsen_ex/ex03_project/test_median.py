@@ -3,3 +3,10 @@
 __author__ = "Sjur Spjeld Klemetsen"
 __email__ = "sjkl@nmbu.no"
 
+
+def median(data):
+    sdata = sorted(data)
+    n = len(sdata)
+    return (sdata[n // 2] if n % 2 == 1
+            else 0.5 * (sdata[n // 2 - 1] + sdata[n // 2]))
+
