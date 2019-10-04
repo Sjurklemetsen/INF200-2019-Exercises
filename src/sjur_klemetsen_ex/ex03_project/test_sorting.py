@@ -26,3 +26,10 @@ def test_sorted_is_not_original():
     sorted_data = bubble_sort(data)
     assert sorted_data != data
 
+
+def test_original_unchanged():
+    data = [3, 2, 1]
+    bubble_sort(data)
+    assert data == data
+
+
