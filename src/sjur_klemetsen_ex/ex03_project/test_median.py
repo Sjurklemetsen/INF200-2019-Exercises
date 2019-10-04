@@ -28,3 +28,9 @@ def test_median_even_numbers():
 def test_ordered():
     ordered_list = [1, 2, 3, 4, 5]
     assert median(ordered_list) == 3
+
+
+def test_reversed_ordered():
+    reversed_list = [4, 3, 2, 1]
+    assert median(reversed_list) == 2.5
+    
