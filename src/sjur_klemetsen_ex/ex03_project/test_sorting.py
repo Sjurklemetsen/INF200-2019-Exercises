@@ -33,3 +33,9 @@ def test_original_unchanged():
     assert data == data
 
 
+def test_sort_sorted():
+    data = [1, 2, 3]
+    sorted_data = bubble_sort(data)
+    assert sorted_data == data
+
+
