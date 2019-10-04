@@ -52,3 +52,9 @@ def test_unordered():
 def test_value_error():
     with pytest.raises(ValueError):
         median([])
+
+
+def test_original_unchanged():
+    original_list = [1, 6, 2, 4, 3]
+    median(original_list)
+    assert original_list == [1, 6, 2, 4, 3]
