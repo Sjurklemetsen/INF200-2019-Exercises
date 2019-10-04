@@ -23,3 +23,8 @@ def test_median_odd_numbers():
 def test_median_even_numbers():
     even_numbers = [1, 3, 2, 5, 4, 6]
     assert median(even_numbers) == 3.5
+
+
+def test_ordered():
+    ordered_list = [1, 2, 3, 4, 5]
+    assert median(ordered_list) == 3
