@@ -40,11 +40,13 @@ def multiple_games(num_games, num_players):
     return num_moves
 
 
-# def multi_game_experiment(num_games, num_players, seed):
+def multi_game_experiment(num_games, num_players, seed):
+    rd.seed(seed)
+    games_with_seed = multiple_games(num_games, num_players)
+    return games_with_seed
 
 
 if __name__ == "__main__":
     game = single_game(4)
     games = multiple_games(8, 4)
-    print(game)
-    print(games)
+    seed_game = multi_game_experiment(8, 4, 5)
