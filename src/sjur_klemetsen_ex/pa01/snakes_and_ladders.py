@@ -33,7 +33,11 @@ def single_game(num_players):
     return num_moves
 
 
-# def multiple_games(num_games, num_players):
+def multiple_games(num_games, num_players):
+    num_moves = []
+    for i in range(num_games):
+        num_moves.append(single_game(num_players))
+    return num_moves
 
 
 # def multi_game_experiment(num_games, num_players, seed):
@@ -41,4 +45,6 @@ def single_game(num_players):
 
 if __name__ == "__main__":
     game = single_game(4)
+    games = multiple_games(8, 4)
     print(game)
+    print(games)
