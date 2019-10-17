@@ -3,6 +3,7 @@
 __author__ = "Sjur Spjeld Klemetsen and Ola Flesche Hellenes"
 __email__ = "sjkl@nmbu.no and olhellen@nmbu.no"
 
+import statistics
 import random as rd
 
 
@@ -47,6 +48,10 @@ def multi_game_experiment(num_games, num_players, seed):
 
 
 if __name__ == "__main__":
-    game = single_game(4)
-    games = multiple_games(8, 4)
-    seed_game = multi_game_experiment(8, 4, 5)
+    seed_game = multi_game_experiment(100, 4, 5)
+    print(seed_game)
+    print(min(seed_game))
+    print(max(seed_game))
+    print(statistics.median(seed_game))
+    print(statistics.mean(seed_game))
+    print(statistics.stdev(seed_game))
