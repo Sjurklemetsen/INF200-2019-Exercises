@@ -49,9 +49,9 @@ def multi_game_experiment(num_games, num_players, seed):
 
 if __name__ == "__main__":
     seed_game = multi_game_experiment(100, 4, 5)
-    print(seed_game)
-    print(min(seed_game))
-    print(max(seed_game))
-    print(statistics.median(seed_game))
-    print(statistics.mean(seed_game))
-    print(statistics.stdev(seed_game))
+    print(f'Seed game experiment: {seed_game}')
+    print(f'The minimum amount of rounds is: {min(seed_game)}')
+    print(f'The maximum amount of rounds is: {max(seed_game)}')
+    print(f'The median is: {statistics.median(seed_game)}')
+    print(f'The mean game duration is: {statistics.mean(seed_game)}')
+    print(f'The standard deviation is: {statistics.stdev(seed_game)}')
