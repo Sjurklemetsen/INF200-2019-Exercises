@@ -6,18 +6,22 @@ __email__ = 'sjkl@nmbu.no'
 
 class LCGRand:
 
-    def _init__(self, seed):
+    def __init__(self, seed):
         self.a = 16807
-        self.m = 2 ^ 31 - 1
-        self.seed = None
+        self.m = 2**31 - 1
+        self.seed = seed
 
     def rand(self):
-        r = self.seed
         while True:
-            r = (self.a * r % self.m)
-            yield r
+            self.seed = (self.a * self.seed) % self.m
+            return self.seed
+
 
 class ListRand:
-# #def __init__(self):
 
-if __main__
+    def __init__(self, numbers):
+        self.numbers = numbers
+
+    def rand(self):
+        for el in self.numbers:
+            yield el
