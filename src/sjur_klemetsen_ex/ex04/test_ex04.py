@@ -6,8 +6,8 @@ Your code should pass these tests before submission.
 """
 
 import pytest
-from myrand import LCGRand, ListRand
-from walker import Walker
+from src.sjur_klemetsen_ex.ex04.myrand import LCGRand, ListRand
+from src.sjur_klemetsen_ex.ex04.walker import Walker
 
 __author__ = 'Hans Ekkehard Plesser'
 __email__ = 'hans.ekkehard.plesser@nmbu.no'
