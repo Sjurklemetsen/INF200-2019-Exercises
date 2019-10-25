@@ -32,3 +32,7 @@ if __name__ == "__main__":
     x = LCGRand(346)
     print(x.rand())
     print(x.rand())
+
+    y = ListRand([2, 6, 7, 8])
+    print(y.rand())
+    print(y.rand())
