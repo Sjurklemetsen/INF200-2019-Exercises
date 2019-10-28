@@ -49,7 +49,7 @@ class Simulation:
     def run_simulation(self, num_walks):
         rd.seed(self.seed)
         return [Walker(self.start, self.home).way_home()
-                for i in range(num_walks)]
+                for _ in range(num_walks)]
 
 
 if __name__ == "__main__":
