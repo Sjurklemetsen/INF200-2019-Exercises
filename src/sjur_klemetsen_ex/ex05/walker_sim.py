@@ -35,9 +35,15 @@ class Walker:
             self.move()
         return self.moves
 
+
 class Simulation:
 
     def __init__(self, start, home, seed):
+
+        self.start = start
+        self.home = home
+        self.seed = seed
+
         """
         Initialise the simulation
 
@@ -53,13 +59,15 @@ class Simulation:
 
     def single_walk(self):
         """
-        Simulate single walk from start to home, returning number of steps.
+                Simulate single walk from start to home, returning number of steps.
 
-        Returns
-        -------
-        int
-            The number of steps taken
-        """
+                Returns
+                -------
+                int
+                    The number of steps taken
+                """
+        return Walker(0, 1).way_home()
+
 
     def run_simulation(self, num_walks):
         """
@@ -75,7 +83,7 @@ class Simulation:
         list[int]
             List with the number of steps per walk
         """
-
+        return [Walker(0, 1).way_home() for i in range(num_walks)]
 
 
 
