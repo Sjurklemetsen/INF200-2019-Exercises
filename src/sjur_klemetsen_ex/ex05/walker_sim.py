@@ -37,18 +37,18 @@ class Walker:
 
 
 class Simulation:
-    def __init__(self, start, home, seed):
-        self.start = start
+    def __init__(self, pos, home, seed):
+        self.pos = pos
         self.home = home
         self.seed = seed
 
     def single_walk(self):
         rd.seed(self.seed)
-        return self.seed(Walker(self.start, self.home).way_home())
+        return self.seed(Walker(self.pos, self.home).way_home())
 
     def run_simulation(self, num_walks):
         rd.seed(self.seed)
-        return [Walker(self.start, self.home).way_home()
+        return [Walker(self.pos, self.home).way_home()
                 for _ in range(num_walks)]
 
 
