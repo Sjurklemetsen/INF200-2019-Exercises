@@ -9,20 +9,36 @@ from src.sjur_klemetsen_ex.ex05.walker_sim import Walker, Simulation
 class BoundedWalker(Walker):
     def __init__(self, pos, home, left_limit, right_limit):
         super().__init__(pos, home)
-        self.pos = pos
-        self.home = home
         self.left_limit = left_limit
         self.right_limit = right_limit
 
     def limit_walk(self):
-        while True:
+        while not self.is_at_home():
+            super().move()
             if super().get_position() < self.left_limit:
-                continue
+                self.pos = self.left_limit
+                self.moves -= 1
             elif super().get_position() > self.right_limit:
-                continue
-            else:
-                super().way_home()
-            return super().get_steps()
+                self.pos = self.right_limit
+                self.moves -= 1
+        return super().get_steps()
+
+class BoundedSimulation(Simulation):
+    def __init__(self, pos, home, seed, left_limit, right_limit):
+        super().__init__(pos, home, seed)
+        self.left_limit = left_limit
+        self.right_limit = right_limit
+
+    def limit_sim(self):
+        while not self.is_at_home():
+            super().move()
+            if super().get_position() < self.left_limit:
+                self.pos = self.left_limit
+                self.moves -= 1
+            elif super().get_position() > self.right_limit:
+                self.pos = self.right_limit
+                self.moves -= 1
+        return super().get_steps()
 
 
 class BoundedSimulation(Simulation):
@@ -38,32 +54,11 @@ class BoundedSimulation(Simulation):
         while True:
             if super().get_position() < self.left_limit:
                 continue
-            elif super().get_position() > self.right_limit:
+             super().get_position() > self.right_limit:
                 continue
             else:
-                super().single_walk()
-            return
-
-
-
-        """
-        Initialise the simulation
-
-        Arguments
-        ---------
-        start : int
-            The walker's initial position
-        home : int
-            The walk ends when the walker reaches home
-        seed : int
-            Random generator seed
-        left_limit : int
-            The left boundary of walker movement
-        right_limit : int
-            The right boundary  of walker movement
-        """
-
-
+                super().move
+            return super().get_steps()
 
 
 
