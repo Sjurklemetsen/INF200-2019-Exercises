@@ -38,16 +38,21 @@ class Walker:
 
 class Simulation:
     def __init__(self, pos, home, seed):
+        """
+        This class simulates a 1D walk from pos to home
+        :param pos: int, starting position
+        :param home: int, end position
+        :param seed: seed for the random number generator
+        """
         self.pos = pos
         self.home = home
-        self.seed = seed
+        rd.seed(seed)
 
     def single_walk(self):
-        rd.seed(self.seed)
-        return self.seed(Walker(self.pos, self.home).way_home())
+        """Performs a single walk and returns steps taken"""
+        return Walker(self.pos, self.home).way_home()
 
     def run_simulation(self, num_walks):
-        rd.seed(self.seed)
         return [Walker(self.pos, self.home).way_home()
                 for _ in range(num_walks)]
 

@@ -30,20 +30,36 @@ class BoundedSimulation(Simulation):
         self.left_limit = left_limit
         self.right_limit = right_limit
 
+    def single_walk(self):
+        walker = BoundedWalker(self.pos, self.home, self.left_limit, self.right_limit)
+        while not walker.is_at_home():
+            walker.move()
+        return walker.get_steps()
+
     def lim_sim(self):
-        sim_walker = BoundedWalker(self.pos, self.home,
-                                   self.left_limit, self.right_limit)
-        return sim_walker.way_home()
+        sim_walk = BoundedWalker(self.pos, self.home, self.left_limit, self.right_limit)
+        return sim_walk.way_home()
 
 
 if __name__ == "__main__":
     print(f'The list for left boundary 0:'
-          f'{[BoundedSimulation(0, 20, 12, 0, 20).lim_sim() for _ in range(20)]}')
+          f'{[BoundedSimulation(0, 20, 12, 0, 20).single_walk() for _ in range(20)]}')
+    print(f'The list for left boundary -10:'
+          f'{[BoundedSimulation(0, 20, 12, -10, 20).single_walk() for _ in range(20)]}')
+    print(f'The list for left boundary -100:'
+          f'{[BoundedSimulation(0, 20, 12, -100, 20).single_walk()for _ in range(20)]}')
+    print(f'The list for left boundary -1000:'
+          f'{[BoundedSimulation(0, 20, 12, -1000, 20).single_walk() for _ in range(20)]}')
+    print(f'The list for left boundary -10000:'
+          f'{[BoundedSimulation(0,20, 12, -10000, 20).single_walk() for _ in range(20)]}')
+
     print(f'The list for left boundary 0:'
-          f'{[BoundedSimulation(0, 20, 12, -10, 20).lim_sim() for _ in range(20)]}')
+          f'{BoundedSimulation(0, 20, 1234, 0, 20).run_simulation(20)}')
     print(f'The list for left boundary 0:'
-          f'{[BoundedSimulation(0, 20, 12, -100, 20).lim_sim()for _ in range(20)]}')
+          f'{BoundedSimulation(0, 20, 1234, -10, 20).run_simulation(20)}')
     print(f'The list for left boundary 0:'
-          f'{[BoundedSimulation(0, 20, 12, -1000, 20).lim_sim() for _ in range(20)]}')
+          f'{BoundedSimulation(0, 20, 1234, -100, 20).run_simulation(20)}')
     print(f'The list for left boundary 0:'
-          f'{[BoundedSimulation(0,20, 12, -10000, 20).lim_sim() for _ in range(20)]}')
+          f'{BoundedSimulation(0, 20, 1234, -1000, 20).run_simulation(20)}')
+    print(f'The list for left boundary 0:'
+          f'{BoundedSimulation(0, 20, 1234, -10000, 20).run_simulation(20)}')
