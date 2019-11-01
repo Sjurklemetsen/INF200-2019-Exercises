@@ -38,13 +38,13 @@ class BoundedSimulation(Simulation):
 
 if __name__ == "__main__":
     seed = 12345
-    print(f'The list for left boundary 0:'
+    print(f'The list for left boundary 0: '
           f'{BoundedSimulation(0, 20, seed, 0, 20).run_simulation(20)}')
-    print(f'The list for left boundary -10:'
+    print(f'The list for left boundary -10: '
           f'{BoundedSimulation(0, 20, seed, -10, 20).run_simulation(20)}')
-    print(f'The list for left boundary -100:'
+    print(f'The list for left boundary -100: '
           f'{BoundedSimulation(0, 20, seed, -100, 20).run_simulation(20)}')
-    print(f'The list for left boundary -1000:'
+    print(f'The list for left boundary -1000: '
           f'{BoundedSimulation(0, 20, seed, -1000, 20).run_simulation(20)}')
-    print(f'The list for left boundary -10000:'
+    print(f'The list for left boundary -10000: '
           f'{BoundedSimulation(0, 20, seed, -10000, 20).run_simulation(20)}')
