@@ -18,7 +18,7 @@ class LCGRand:
         return RandIter(self, length)
 
     def infinite_random_sequence(self):
-        return RandIter(self, -1)
+        return RandIter(self)
 
 
 class RandIter:
