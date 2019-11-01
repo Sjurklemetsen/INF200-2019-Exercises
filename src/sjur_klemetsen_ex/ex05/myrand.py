@@ -47,7 +47,8 @@ if __name__ == "__main__":
     for rand in random_number_generator.random_sequence(10):
         print(rand)
 
-    for i, rand in enumerate(random_number_generator.infinite_random_sequence()):
+    for i, rand in \
+            enumerate(random_number_generator.infinite_random_sequence()):
         print(f'The {i}-th random number is {rand}')
         if i > 100:
             break
