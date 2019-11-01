@@ -53,8 +53,7 @@ class Simulation:
         return Walker(self.pos, self.home).way_home()
 
     def run_simulation(self, num_walks):
-        return [Walker(self.pos, self.home).way_home()
-                for _ in range(num_walks)]
+        return [self.single_walk() for _ in range(num_walks)]
 
 
 if __name__ == "__main__":
