@@ -18,11 +18,11 @@ class LCGRand:
         return RandIter(self, length)
 
     def infinite_random_sequence(self):
-        return RandIter(self)
+        return RandIter(self, -1)
 
 
 class RandIter:
-    def __init__(self, random_number_generator, *length):
+    def __init__(self, random_number_generator, length):
         self.generator = random_number_generator
         self.length = length
         self.num_generated_numbers = None
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     for rand in random_number_generator.random_sequence(10):
         print(rand)
 
-    for i, rand in random_number_generator.infinite_random_sequence():
+    for i, rand in enumerate(random_number_generator.infinite_random_sequence()):
         print(f'The {i}-th random number is {rand}')
         if i > 100:
             break
