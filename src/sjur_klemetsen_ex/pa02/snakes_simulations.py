@@ -7,25 +7,58 @@ import random as rd
 
 
 class Board:
+    """
+    This class manage all information about ladders, snakes and
+    if the goal has been reached.
+    """
     def __init__(self):
-        pass
-
-    def position(self):
-        pass
+        self.ladder = {1: 40, 8: 10, 36: 52, 43: 62, 49: 79, 65: 82, 68: 85}
+        self.snakes = {24: 5, 33: 3, 42: 30, 56: 37, 64: 27, 74: 12, 87: 70}
+        self.board = [x for x in range(1, 91)]
+        self.pos = Player().position()
 
     def goal_reached(self):
-        pass
+        """
+        :return: True or False depending if you have reached the goal or not
+        """
+        if self.pos >= len(self.board):
+            return True
+        else:
+            return False
 
     def position_adjustment(self):
-        pass
+        """
+        :return: value of number of jumps player has skipped if player hits a
+        ladder or snake. If player is not on any ladder or snake returns 0.
+        """
+        for (key1, value1), (key2, value2) in zip(self.ladder.items(),
+                                                  self.snakes.items()):
+            if self.pos == key1:
+                self.pos = value1
+                return value1 - key1
+            elif self.pos == key2:
+                self.pos = value2
+                return value2 - key2
+            else:
+                continue
+        return 0
 
 
 class Player:
+    """
+    Manages information about a players position, including which board the
+    player is on.
+    """
     def __init__(self):
-        pass
+        board = Board()
+        self.player = Player(board)
 
     def move(self):
-        pass
+        roll = rd.randint(1, 6)
+        self.player += roll
+
+    def position(self):
+        return self.player
 
 
 class ResilientPlayer(Player):
