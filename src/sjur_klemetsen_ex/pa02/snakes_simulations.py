@@ -15,7 +15,6 @@ class Board:
         self.ladder = {1: 40, 8: 10, 36: 52, 43: 62, 49: 79, 65: 82, 68: 85}
         self.snakes = {24: 5, 33: 3, 42: 30, 56: 37, 64: 27, 74: 12, 87: 70}
         self.board = [x for x in range(1, 91)]
-        self.pos = Player().position()
 
     def goal_reached(self):
         """
@@ -26,18 +25,18 @@ class Board:
         else:
             return False
 
-    def position_adjustment(self):
+    def position_adjustment(self, pos):
         """
-        :return: value of number of jumps player has skipped if player hits a
-        ladder or snake. If player is not on any ladder or snake returns 0.
+        :param pos: Position on the board
+        :return: The number of positions you skip if you land on a certain
+        snake or ladder. If position is not on any ladder or snake
+        it returns 0.
         """
         for (key1, value1), (key2, value2) in zip(self.ladder.items(),
                                                   self.snakes.items()):
-            if self.pos == key1:
-                self.pos = value1
+            if pos == key1:
                 return value1 - key1
-            elif self.pos == key2:
-                self.pos = value2
+            elif pos == key2:
                 return value2 - key2
             else:
                 continue
@@ -56,6 +55,14 @@ class Player:
     def move(self):
         roll = rd.randint(1, 6)
         self.player += roll
+        for (key1, value1), (key2, value2) in zip(Board().ladder.items(),
+                                                  Board().snakes.items()):
+            if self.player == key1:
+                self.player = value1
+            elif self.player == key2:
+                self.player = value2
+            else:
+                continue
 
     def position(self):
         return self.player
@@ -90,5 +97,5 @@ class Simulations:
     def durations_per_type(self):
         pass
 
-    def players_per_type(self):
+    def players_per_type(self, k):
         pass
