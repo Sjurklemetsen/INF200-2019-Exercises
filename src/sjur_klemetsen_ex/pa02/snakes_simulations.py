@@ -64,13 +64,28 @@ class Player:
             else:
                 continue
 
-    def position(self):
-        return self.player
-
 
 class ResilientPlayer(Player):
-    def __init__(self):
-        pass
+    def __init__(self, extra_steps=1):
+        super().__init__(self)
+        self.extra_steps = extra_steps
+        self.hit_snake = False
+
+    def move(self):
+        roll = rd.randint(1, 6)
+        self.player += roll
+        if self.hit_snake:
+            self.player += self.extra_steps
+            self.hit_snake = False
+        for (key1, value1), (key2, value2) in zip(Board().ladder.items(),
+                                                  Board().snakes.items()):
+            if self.player == key1:
+                self.player = value1
+            elif self.player == key2:
+                self.player = value2
+                self.hit_snake = True
+            else:
+                continue
 
 
 class LazyPlayer(Player):
