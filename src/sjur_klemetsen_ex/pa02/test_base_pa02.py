@@ -7,10 +7,7 @@ Minimal set of compatibility tests for PA02.
 __author__ = 'Hans Ekkehard Plesser'
 __email__ = 'hans.ekkehard.plesser@nmbu.no'
 
-
-from INF200-2019-Exersices.src.sjur_klemetsen_Ex.pa02 import snakes_simulations as cs
-
-import pytest
+from src.sjur_klemetsen_ex.pa02 import snakes_simulations as cs
 
 
 class TestBoard:
