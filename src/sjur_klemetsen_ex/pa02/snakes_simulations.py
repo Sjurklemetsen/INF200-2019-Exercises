@@ -11,33 +11,32 @@ class Board:
     This class manage all information about ladders, snakes and
     if the goal has been reached.
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.ladder = {1: 40, 8: 10, 36: 52, 43: 62, 49: 79, 65: 82, 68: 85}
         self.snakes = {24: 5, 33: 3, 42: 30, 56: 37, 64: 27, 74: 12, 87: 70}
         self.board = [x for x in range(1, 91)]
-        self.pos = Player().position()
 
-    def goal_reached(self):
+    def goal_reached(self, position):
         """
         :return: True or False depending if you have reached the goal or not
         """
-        if self.pos >= len(self.board):
+        if position >= len(self.board):
             return True
         else:
             return False
 
-    def position_adjustment(self):
+    def position_adjustment(self, position):
         """
-        :return: value of number of jumps player has skipped if player hits a
-        ladder or snake. If player is not on any ladder or snake returns 0.
+        :param position: Position on the board
+        :return: The number of positions you skip if you land on a certain
+        snake or ladder. If position is not on any ladder or snake
+        it returns 0.
         """
         for (key1, value1), (key2, value2) in zip(self.ladder.items(),
                                                   self.snakes.items()):
-            if self.pos == key1:
-                self.pos = value1
+            if position == key1:
                 return value1 - key1
-            elif self.pos == key2:
-                self.pos = value2
+            elif position == key2:
                 return value2 - key2
             else:
                 continue
@@ -49,26 +48,78 @@ class Player:
     Manages information about a players position, including which board the
     player is on.
     """
-    def __init__(self):
-        board = Board()
-        self.player = Player(board)
+    def __init__(self, board):
+        self.board = board
+        self.pos = 0
 
     def move(self):
         roll = rd.randint(1, 6)
-        self.player += roll
-
-    def position(self):
-        return self.player
+        self.pos += roll
+        for (key1, value1), (key2, value2) in zip(Board().ladder.items(),
+                                                  Board().snakes.items()):
+            if self.pos == key1:
+                self.pos = value1
+            elif self.pos == key2:
+                self.pos = value2
+            else:
+                continue
 
 
 class ResilientPlayer(Player):
-    def __init__(self):
-        pass
+    def __init__(self, board, extra_steps=None):
+        super().__init__(self)
+        self.board = board
+        self.extra_steps = extra_steps
+        if self.extra_steps is None:
+            self.extra_steps = 1
+        self.hit_snake = False
+
+    def move(self):
+        roll = rd.randint(1, 6)
+        self.pos += roll
+        if self.hit_snake:
+            self.pos += self.extra_steps
+            self.hit_snake = False
+        for (key1, value1), (key2, value2) in zip(Board().ladder.items(),
+                                                  Board().snakes.items()):
+            if self.pos == key1:
+                self.pos = value1
+            elif self.pos == key2:
+                self.pos = value2
+                self.hit_snake = True
+            else:
+                continue
 
 
 class LazyPlayer(Player):
-    def __init__(self):
-        pass
+    def __init__(self, board, dropped_steps=None):
+        super().__init__(self)
+        self.board = board
+        self.drop_steps = dropped_steps
+        self.hit_ladder = False
+        if self.drop_steps is None:
+            self.drop_steps = 1
+
+    def move(self):
+        roll = rd.randint(1, 6)
+        self.pos += roll
+
+        if self.hit_ladder:
+            if roll >= self.drop_steps:
+                self.pos -= self.drop_steps
+                self.hit_ladder = False
+            else:
+                self.hit_ladder = False
+
+        for (key1, value1), (key2, value2) in zip(Board().ladder.items(),
+                                                  Board().snakes.items()):
+            if self.pos == key1:
+                self.pos = value1
+                self.hit_ladder = True
+            elif self.pos == key2:
+                self.pos = value2
+            else:
+                continue
 
 
 class Simulations:
@@ -90,5 +141,5 @@ class Simulations:
     def durations_per_type(self):
         pass
 
-    def players_per_type(self):
+    def players_per_type(self, k):
         pass
