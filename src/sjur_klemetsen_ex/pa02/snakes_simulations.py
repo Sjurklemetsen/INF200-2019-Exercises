@@ -53,6 +53,10 @@ class Player:
         self.pos = 0
 
     def move(self):
+        """
+        Moves a player with a dice on the board
+        :return: Doesnt return anything
+        """
         roll = rd.randint(1, 6)
         self.pos += roll
         for (key1, value1), (key2, value2) in zip(Board().ladder.items(),
@@ -66,6 +70,9 @@ class Player:
 
 
 class ResilientPlayer(Player):
+    """
+
+    """
     def __init__(self, board, extra_steps=None):
         super().__init__(self)
         self.board = board
@@ -123,11 +130,15 @@ class LazyPlayer(Player):
 
 
 class Simulations:
-    def __init__(self):
-        pass
+    def __init__(self, l, randomize_players=True):
+        if randomize_players is True:
+            self.seed = rd.seed
+        self.l = l
 
     def single_game(self):
-        pass
+        for
+        if Board().goal_reached(self.pos) is False:
+            Player().move()
 
     def run_simulation(self):
         pass
