@@ -66,52 +66,58 @@ class Player:
 
 
 class ResilientPlayer(Player):
-    def __init__(self, extra_steps=1):
+    def __init__(self, board, extra_steps=None):
         super().__init__(self)
+        self.board = board
         self.extra_steps = extra_steps
+        if self.extra_steps is None:
+            self.extra_steps = 1
         self.hit_snake = False
 
     def move(self):
         roll = rd.randint(1, 6)
-        self.player += roll
+        self.pos += roll
         if self.hit_snake:
-            self.player += self.extra_steps
+            self.pos += self.extra_steps
             self.hit_snake = False
         for (key1, value1), (key2, value2) in zip(Board().ladder.items(),
                                                   Board().snakes.items()):
-            if self.player == key1:
-                self.player = value1
-            elif self.player == key2:
-                self.player = value2
+            if self.pos == key1:
+                self.pos = value1
+            elif self.pos == key2:
+                self.pos = value2
                 self.hit_snake = True
             else:
                 continue
 
 
 class LazyPlayer(Player):
-    def __init__(self, drop_steps=1):
+    def __init__(self, board, dropped_steps=None):
         super().__init__(self)
-        self.drop_steps = drop_steps
+        self.board = board
+        self.drop_steps = dropped_steps
         self.hit_ladder = False
+        if self.drop_steps is None:
+            self.drop_steps = 1
 
     def move(self):
         roll = rd.randint(1, 6)
-        self.player += roll
+        self.pos += roll
 
         if self.hit_ladder:
             if roll >= self.drop_steps:
-                self.player -= self.drop_steps
+                self.pos -= self.drop_steps
                 self.hit_ladder = False
             else:
                 self.hit_ladder = False
 
         for (key1, value1), (key2, value2) in zip(Board().ladder.items(),
                                                   Board().snakes.items()):
-            if self.player == key1:
-                self.player = value1
+            if self.pos == key1:
+                self.pos = value1
                 self.hit_ladder = True
-            elif self.player == key2:
-                self.player = value2
+            elif self.pos == key2:
+                self.pos = value2
             else:
                 continue
 
