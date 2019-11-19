@@ -51,6 +51,7 @@ class Player:
     def __init__(self, board):
         self.board = board
         self.pos = 0
+        self.num_moves = 0
 
     def move(self):
         """
@@ -67,6 +68,7 @@ class Player:
                 self.pos = value2
             else:
                 continue
+        self.num_moves += 1
 
 
 class ResilientPlayer(Player):
@@ -74,8 +76,7 @@ class ResilientPlayer(Player):
 
     """
     def __init__(self, board, extra_steps=None):
-        super().__init__(self)
-        self.board = board
+        super().__init__(board)
         self.extra_steps = extra_steps
         if self.extra_steps is None:
             self.extra_steps = 1
@@ -96,12 +97,12 @@ class ResilientPlayer(Player):
                 self.hit_snake = True
             else:
                 continue
+        self.num_moves += 1
 
 
 class LazyPlayer(Player):
     def __init__(self, board, dropped_steps=None):
-        super().__init__(self)
-        self.board = board
+        super().__init__(board)
         self.drop_steps = dropped_steps
         self.hit_ladder = False
         if self.drop_steps is None:
@@ -127,6 +128,7 @@ class LazyPlayer(Player):
                 self.pos = value2
             else:
                 continue
+        self.num_moves += 1
 
 
 class Simulation:
@@ -137,23 +139,16 @@ class Simulation:
         if randomize_players is True:
             rd.seed(self.seed)
             rd.shuffle(self.list_of_players)
-        for player in self.list_of_players:
-            player(Board())
+        self.list_of_players = [player(Board()) for player in self.list_of_players]
+
 
     def single_game(self):
         while True:
             for player in self.list_of_players:
                 player.move()
+                if player.board.goal_reached(player.pos):
+                    return player.num_moves, type(player).__name__
 
-
-                    LazyPlayer(self.a).move()
-                elif player == ResilientPlayer:
-                    ResilientPlayer(self.a).move()
-                    countRes += 1
-                else:
-                    Player(self.a).move()
-                    countPlay +=1
-            return tuple()
 
 
 
@@ -172,3 +167,8 @@ class Simulation:
 
     def players_per_type(self, k):
         pass
+
+if __name__ == "__main__":
+    tester = Simulation([Player, ResilientPlayer, LazyPlayer])
+    numa = tester.single_game()
+    print(numa)
