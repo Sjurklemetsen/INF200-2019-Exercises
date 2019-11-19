@@ -11,23 +11,16 @@ class Board:
     This class manage all information about ladders, snakes and
     if the goal has been reached.
     """
-    def __init__(self, ladder=None, snakes=None, board=None):
-        if ladder is None:
-            ladder = {1: 40, 8: 10, 36: 52, 43: 62, 49: 79, 65: 82, 68: 85}
-        if snakes is None:
-            snakes = {24: 5, 33: 3, 42: 30, 56: 37, 64: 27, 74: 12, 87: 70}
-        if board is None:
-            board = [x for x in range(1, 91)]
+    def __init__(self, *args, **kwargs):
+        self.ladder = {1: 40, 8: 10, 36: 52, 43: 62, 49: 79, 65: 82, 68: 85}
+        self.snakes = {24: 5, 33: 3, 42: 30, 56: 37, 64: 27, 74: 12, 87: 70}
+        self.board = [x for x in range(1, 91)]
 
-        self.ladder = ladder
-        self.snakes = snakes
-        self.board = board
-
-    def goal_reached(self):
+    def goal_reached(self, position):
         """
         :return: True or False depending if you have reached the goal or not
         """
-        if self.pos >= len(self.board):
+        if position >= len(self.board):
             return True
         else:
             return False
@@ -55,19 +48,19 @@ class Player:
     Manages information about a players position, including which board the
     player is on.
     """
-    def __init__(self):
-        board = Board()
-        self.player = Player(board)
+    def __init__(self, board):
+        self.board = board
+        self.pos = 0
 
     def move(self):
         roll = rd.randint(1, 6)
-        self.player += roll
+        self.pos += roll
         for (key1, value1), (key2, value2) in zip(Board().ladder.items(),
                                                   Board().snakes.items()):
-            if self.player == key1:
-                self.player = value1
-            elif self.player == key2:
-                self.player = value2
+            if self.pos == key1:
+                self.pos = value1
+            elif self.pos == key2:
+                self.pos = value2
             else:
                 continue
 
@@ -97,10 +90,30 @@ class ResilientPlayer(Player):
 
 class LazyPlayer(Player):
     def __init__(self, drop_steps=1):
+        super().__init__(self)
         self.drop_steps = drop_steps
-        
+        self.hit_ladder = False
 
+    def move(self):
+        roll = rd.randint(1, 6)
+        self.player += roll
 
+        if self.hit_ladder:
+            if roll >= self.drop_steps:
+                self.player -= self.drop_steps
+                self.hit_ladder = False
+            else:
+                self.hit_ladder = False
+
+        for (key1, value1), (key2, value2) in zip(Board().ladder.items(),
+                                                  Board().snakes.items()):
+            if self.player == key1:
+                self.player = value1
+                self.hit_ladder = True
+            elif self.player == key2:
+                self.player = value2
+            else:
+                continue
 
 
 class Simulations:
