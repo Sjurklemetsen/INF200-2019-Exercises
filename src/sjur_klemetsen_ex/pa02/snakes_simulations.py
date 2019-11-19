@@ -139,25 +139,25 @@ class Simulation:
         if randomize_players is True:
             rd.seed(self.seed)
             rd.shuffle(self.list_of_players)
-        self.list_of_players = [player(Board()) for player in self.list_of_players]
-
+        self.sim_results = []
 
     def single_game(self):
+        self.list_of_players = [player(Board()) for player in
+                                self.list_of_players]
         while True:
             for player in self.list_of_players:
                 player.move()
                 if player.board.goal_reached(player.pos):
                     return player.num_moves, type(player).__name__
 
-
-
-
-
-    def run_simulation(self):
-        pass
+    def run_simulation(self, n):
+        for i in range(n):
+            self.sim_results.append(
+                Simulation(self.list_of_players).single_game()
+            )
 
     def get_results(self):
-        pass
+        return self.sim_results
 
     def winners_per_type(self):
         pass
