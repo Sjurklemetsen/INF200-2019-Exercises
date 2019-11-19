@@ -141,9 +141,11 @@ class Simulation:
             player(Board())
 
     def single_game(self):
-        while Board().goal_reached() is False:
+        while True:
             for player in self.list_of_players:
-                if player == LazyPlayer:
+                player.move()
+
+
                     LazyPlayer(self.a).move()
                 elif player == ResilientPlayer:
                     ResilientPlayer(self.a).move()
