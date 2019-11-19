@@ -129,16 +129,32 @@ class LazyPlayer(Player):
                 continue
 
 
-class Simulations:
-    def __init__(self, l, randomize_players=True):
+class Simulation:
+    def __init__(self, player_field, seed=None, randomize_players=False,
+                 **kwarg):
+        self.list_of_players = player_field
+        self.seed = seed
         if randomize_players is True:
-            self.seed = rd.seed
-        self.l = l
+            rd.seed(self.seed)
+            rd.shuffle(self.list_of_players)
+        for player in self.list_of_players:
+            player(Board())
 
     def single_game(self):
-        for
-        if Board().goal_reached(self.pos) is False:
-            Player().move()
+        while Board().goal_reached() is False:
+            for player in self.list_of_players:
+                if player == LazyPlayer:
+                    LazyPlayer(self.a).move()
+                elif player == ResilientPlayer:
+                    ResilientPlayer(self.a).move()
+                    countRes += 1
+                else:
+                    Player(self.a).move()
+                    countPlay +=1
+            return tuple()
+
+
+
 
     def run_simulation(self):
         pass
