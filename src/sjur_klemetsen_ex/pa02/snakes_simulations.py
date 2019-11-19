@@ -11,10 +11,17 @@ class Board:
     This class manage all information about ladders, snakes and
     if the goal has been reached.
     """
-    def __init__(self):
-        self.ladder = {1: 40, 8: 10, 36: 52, 43: 62, 49: 79, 65: 82, 68: 85}
-        self.snakes = {24: 5, 33: 3, 42: 30, 56: 37, 64: 27, 74: 12, 87: 70}
-        self.board = [x for x in range(1, 91)]
+    def __init__(self, ladder=None, snakes=None, board=None):
+        if ladder is None:
+            ladder = {1: 40, 8: 10, 36: 52, 43: 62, 49: 79, 65: 82, 68: 85}
+        if snakes is None:
+            snakes = {24: 5, 33: 3, 42: 30, 56: 37, 64: 27, 74: 12, 87: 70}
+        if board is None:
+            board = [x for x in range(1, 91)]
+
+        self.ladder = ladder
+        self.snakes = snakes
+        self.board = board
 
     def goal_reached(self):
         """
@@ -25,18 +32,18 @@ class Board:
         else:
             return False
 
-    def position_adjustment(self, pos):
+    def position_adjustment(self, position):
         """
-        :param pos: Position on the board
+        :param position: Position on the board
         :return: The number of positions you skip if you land on a certain
         snake or ladder. If position is not on any ladder or snake
         it returns 0.
         """
         for (key1, value1), (key2, value2) in zip(self.ladder.items(),
                                                   self.snakes.items()):
-            if pos == key1:
+            if position == key1:
                 return value1 - key1
-            elif pos == key2:
+            elif position == key2:
                 return value2 - key2
             else:
                 continue
@@ -89,8 +96,11 @@ class ResilientPlayer(Player):
 
 
 class LazyPlayer(Player):
-    def __init__(self):
-        pass
+    def __init__(self, drop_steps=1):
+        self.drop_steps = drop_steps
+        
+
+
 
 
 class Simulations:
