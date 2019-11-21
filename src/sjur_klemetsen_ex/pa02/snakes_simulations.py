@@ -169,7 +169,13 @@ class Simulation:
         return winner_type
 
     def durations_per_type(self):
-        pass
+        winner_duration = {}
+        win = []
+        for i in self.sim_results:
+            win.append(i[1])
+        for i in win:
+            i.
+
 
     def players_per_type(self, k):
         pass
