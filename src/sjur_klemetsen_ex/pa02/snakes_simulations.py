@@ -20,9 +20,6 @@ class Board:
                            68: 85}
             self.snakes = {24: 5, 33: 3, 42: 30, 56: 37, 64: 27, 74: 12,
                            87: 70}
-        print(self.ladder)
-        print(self.snakes)
-        print(self.board)
 
     def goal_reached(self, position):
         """
