@@ -7,26 +7,6 @@ import random as rd
 
 
 class Board:
-    """
-    This class manage all information about ladders, snakes and
-    if the goal has been reached.
-
-    def __init__(self, ladder=None, snakes=None, board=None):
-        if ladder is None:
-            self.ladder = {1: 40, 8: 10, 36: 52, 43: 62, 49: 79, 65: 82,
-                           68: 85}
-        else:
-            self.ladder = ladder
-        if snakes is None:
-            self.snakes = {24: 5, 33: 3, 42: 30, 56: 37, 64: 27, 74: 12,
-                           87: 70}
-        else:
-            self.snakes = snakes
-        if board is None:
-            self.board = [x for x in range(1, 91)]
-        else:
-            self.board = board
-    """
     def __init__(self, *args, **kwargs):
         self.board = args
         self.ladder = kwargs
