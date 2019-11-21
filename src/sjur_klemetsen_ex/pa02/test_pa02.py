@@ -6,22 +6,25 @@ __email__ = 'sjkl@nmbu.no, olhellen@nmbu.no'
 from src.sjur_klemetsen_ex.pa02 import snakes_simulations as cs
 
 
-def test_arbitrary_input_works():
+def test_position_adj():
     """
-    Test if your inputs are set as variables in board,
-     or if the standard variables are used anyway,
-      whether you give inputs or not.
+    testin position adjustments give the right results
     :return:
     """
-    b = cs.Board()
-    assert()
+    a = cs.Board().position_adjustment(8)
+    assert a == 2
 
-def test_if_method_moves_you():
+
+def test_if_move_method_moves_you():
     """
     Test if the player moves a step
      when the move method is called.
     :return:
     """
-    b = cs.Simulation.
-    assert()
-
+    a = cs.Board
+    b = cs.Player(a)
+    b.move()
+    d = b.get_position()
+    b.move()
+    e = b.get_position()
+    assert d != e
