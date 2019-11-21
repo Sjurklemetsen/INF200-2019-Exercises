@@ -4,6 +4,7 @@ __author__ = 'Sjur Spjeld Klemetsen, Ola Flesche Hellenes'
 __email__ = 'sjkl@nmbu.no, olhellen@nmbu.no'
 
 import random as rd
+from collections import Counter
 
 
 class Board:
@@ -140,10 +141,12 @@ class Simulation:
             rd.seed(self.seed)
             rd.shuffle(self.list_of_players)
         self.sim_results = []
+        print(self.list_of_players)
 
     def single_game(self):
         self.list_of_players = [player(Board()) for player in
                                 self.list_of_players]
+        print(self.list_of_players)
         while True:
             for player in self.list_of_players:
                 player.move()
@@ -175,7 +178,7 @@ class Simulation:
         laz_steps = []
         for k in self.sim_results:
             if k[1] == 'ResilientPlayer':
-                win_dict['ResilientPlayer'] = res_steps.append(k[0])
+                res_steps.append(k[0])
             elif k[1] == 'LazyPlayer':
                 laz_steps.append(k[0])
             else:
@@ -185,17 +188,19 @@ class Simulation:
         win_dict['LazyPlayer'] = laz_steps
         return win_dict
 
-    def players_per_type(self, k):
-        pass
+    def players_per_type(self):
+        players_type = {'Player': self.list_of_players.count('Player'),
+                        'ResilientPlayer': self.list_of_players.count(
+                            'ResilientPlayer'),
+                        'LazyPlayer': self.list_of_players.count('LazyPlayer')}
+        return
 
 
 if __name__ == "__main__":
     player_field = [Player, Player, ResilientPlayer, ResilientPlayer,
                     ResilientPlayer, LazyPlayer]
     a = Simulation(player_field)
-    a.run_simulation(5)
-
-    print(a.durations_per_type())
+    a.single_game()
 
 
 
