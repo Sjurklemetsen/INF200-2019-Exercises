@@ -4,7 +4,6 @@ __author__ = 'Sjur Spjeld Klemetsen, Ola Flesche Hellenes'
 __email__ = 'sjkl@nmbu.no, olhellen@nmbu.no'
 
 import random as rd
-from collections import Counter
 
 
 class Board:
@@ -189,20 +188,8 @@ class Simulation:
         return win_dict
 
     def players_per_type(self):
-        players_type = {'Player': self.list_of_players.count('Player'),
+        players_type = {'Player': self.list_of_players.count(Player),
                         'ResilientPlayer': self.list_of_players.count(
-                            'ResilientPlayer'),
-                        'LazyPlayer': self.list_of_players.count('LazyPlayer')}
-        return
-
-
-if __name__ == "__main__":
-    player_field = [Player, Player, ResilientPlayer, ResilientPlayer,
-                    ResilientPlayer, LazyPlayer]
-    a = Simulation(player_field)
-    a.single_game()
-
-
-
-
-
+                            ResilientPlayer),
+                        'LazyPlayer': self.list_of_players.count(LazyPlayer)}
+        return players_type
