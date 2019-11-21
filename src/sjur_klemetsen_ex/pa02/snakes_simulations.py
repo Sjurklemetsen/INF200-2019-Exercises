@@ -169,18 +169,35 @@ class Simulation:
         return winner_type
 
     def durations_per_type(self):
-        winner_duration = {}
-        win = []
-        for i in self.sim_results:
-            win.append(i[1])
-        for i in win:
-            i.
-
+        win_dict = {}
+        play_steps = []
+        res_steps = []
+        laz_steps = []
+        for k in self.sim_results:
+            if k[1] == 'ResilientPlayer':
+                win_dict['ResilientPlayer'] = res_steps.append(k[0])
+            elif k[1] == 'LazyPlayer':
+                laz_steps.append(k[0])
+            else:
+                play_steps.append(k[0])
+        win_dict['Player'] = play_steps
+        win_dict['ResilientPlayer'] = res_steps
+        win_dict['LazyPlayer'] = laz_steps
+        return win_dict
 
     def players_per_type(self, k):
         pass
 
+
 if __name__ == "__main__":
-    tester = Simulation([Player, ResilientPlayer, LazyPlayer])
-    numa = tester.single_game()
-    print(numa)
+    player_field = [Player, Player, ResilientPlayer, ResilientPlayer,
+                    ResilientPlayer, LazyPlayer]
+    a = Simulation(player_field)
+    a.run_simulation(5)
+
+    print(a.durations_per_type())
+
+
+
+
+
