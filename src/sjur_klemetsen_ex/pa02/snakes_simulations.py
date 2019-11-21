@@ -99,14 +99,20 @@ class Player:
         self.num_moves += 1
 
     def get_position(self):
+        """
+        :return: current position
+        """
         return self.pos
 
 
 class ResilientPlayer(Player):
     """
-
+    A resilient player will take extra steps in the next move
     """
     def __init__(self, board, extra_steps=None):
+        """
+        :param extra_steps: define number of extra steps
+        """
         super().__init__(board)
         self.extra_steps = extra_steps
         if self.extra_steps is None:
@@ -114,6 +120,10 @@ class ResilientPlayer(Player):
         self.hit_snake = False
 
     def move(self):
+        """
+        Move of a resilient player
+        :return:
+        """
         roll = rd.randint(1, 6)
         self.pos += roll
         if self.hit_snake:
@@ -132,7 +142,14 @@ class ResilientPlayer(Player):
 
 
 class LazyPlayer(Player):
+    """
+    A lazy player drops a given number of steps when hitting a ladder and does
+    not fall down when hitting snakes
+    """
     def __init__(self, board, dropped_steps=None):
+        """
+        :param dropped_steps: Steps dropped when hitting ladders
+        """
         super().__init__(board)
         self.drop_steps = dropped_steps
         self.hit_ladder = False
@@ -140,6 +157,10 @@ class LazyPlayer(Player):
             self.drop_steps = 1
 
     def move(self):
+        """
+        A lazy players moving behaviour
+        :return:
+        """
         roll = rd.randint(1, 6)
         self.pos += roll
 
@@ -163,8 +184,16 @@ class LazyPlayer(Player):
 
 
 class Simulation:
+    """
+    Simulates many games and gives certain analysis
+    """
     def __init__(self, player_field, seed=None, randomize_players=False,
                  **kwarg):
+        """
+        :param player_field: a list of different player types
+        :param seed: random seed
+        :param randomize_players: randomize player field or not
+        """
         self.list_of_players = player_field
         self.seed = seed
         if randomize_players is True:
@@ -174,6 +203,10 @@ class Simulation:
         print(self.list_of_players)
 
     def single_game(self):
+        """
+        Simulates a single game of chutes and ladders
+        :return: a tuple consisting of the winner type and number of moves
+        """
         self.list_of_players = [player(Board()) for player in
                                 self.list_of_players]
         print(self.list_of_players)
@@ -184,15 +217,27 @@ class Simulation:
                     return player.num_moves, type(player).__name__
 
     def run_simulation(self, n):
+        """
+        Run n single games
+        :param n: amount of games played
+        :return:
+        """
         for i in range(n):
             self.sim_results.append(
                 Simulation(self.list_of_players).single_game()
             )
 
     def get_results(self):
+        """
+        :return: a list of all winners and number of moves made
+        """
         return self.sim_results
 
     def winners_per_type(self):
+        """
+        Counts number of wins in a simulation for each player type
+        :return: dictionary
+        """
         winner_type = {}
         winner = []
         for i in self.sim_results:
@@ -202,6 +247,10 @@ class Simulation:
         return winner_type
 
     def durations_per_type(self):
+        """
+        Number of moves made in a set of simulations each player type has
+        :return: dictionary with a list of moves and winner as key
+        """
         win_dict = {}
         play_steps = []
         res_steps = []
@@ -219,6 +268,10 @@ class Simulation:
         return win_dict
 
     def players_per_type(self):
+        """
+        How many players participating for each type
+        :return: A dictionary with number of players participating
+        """
         players_type = {'Player': self.list_of_players.count(Player),
                         'ResilientPlayer': self.list_of_players.count(
                             ResilientPlayer),
